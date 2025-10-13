@@ -3,7 +3,7 @@ int main()
 {
 	int number;
 	do {
-		printf("«Î ‰»Î-1/0/1");
+		printf("Please enter:-1/0/1");
 		scanf_s("%d", &number);
 		if (number == 0) { printf("helloworld\\n"); }
 		else if (number == 1) { printf("HELLOWORLD\\n"); }
