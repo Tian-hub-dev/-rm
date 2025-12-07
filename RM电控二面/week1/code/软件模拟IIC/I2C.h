@@ -1,4 +1,4 @@
-#ifndef I2C_h                             //定义宏名
+#ifndef I2C_h                             //露篓脪氓潞锚脙没
 #define I2C_h 
 
 #include <stdint.h> 
@@ -8,6 +8,9 @@ void I2C_Stop(void);
 void I2C_SendByte(uint8_t data);
 uint8_t I2C_ReceiveAck(void);
 
+void  I2C_Delay(void);
+
 void I2C_SendData(uint8_t data);
 #endif
+
 
