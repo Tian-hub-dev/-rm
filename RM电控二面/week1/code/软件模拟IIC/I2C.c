@@ -1,26 +1,35 @@
 #include "I2C.h"
 #include "RM.h"
 
+void  I2C_Delay(void)
+{
+    unsigned char i;
+	for (i=0;i<15;i++);
+}
 
-void I2C_Start(void)                      //¿ªÊ¼Ìõ¼þº¯Êý
+void I2C_Start(void)                      //å¼€å§‹æ¡ä»¶å‡½æ•°
 {
 	SCL_High();
 	SDA_High();
+	I2C_Delay();
 	SDA_Low();
+	I2C_Delay();
 	SCL_Low();
-}
-void I2C_Stop(void)                       //ÖÕÖ¹Ìõ¼þº¯Êý
+	}
+void I2C_Stop(void)                       //ç»ˆæ­¢æ¡ä»¶å‡½æ•°
 {
 	SCL_High();
+	I2C_Delay();
 	SDA_Low();
+	I2C_Delay();
 	SDA_High();
 }
 
-void I2C_SendByte(uint8_t data)             //·¢ËÍ×Ö½Ú
+void I2C_SendByte(uint8_t data)             //å‘é€å­—èŠ‚
 {
 	for (uint8_t i = 0; i < 8;i++)
 	{
-		if (data & 0x80)                    //Î»ÔËËã
+		if (data & 0x80)                    //ä½è¿ç®—
 		{
 			SDA_High();
 		}
@@ -28,25 +37,28 @@ void I2C_SendByte(uint8_t data)             //·¢ËÍ×Ö½Ú
 		{
 			SDA_Low();
 		}
+		I2C_Delay();
 		SCL_High();
 		SCL_Low();
-		data <<= 1;                        //×óÒÆ¸³ÖµÔËËã
+		data <<= 1;                        //å·¦ç§»èµ‹å€¼è¿ç®—
 	}
 }
-uint8_t I2C_ReceiveAck(void)               //½ÓÊÜÓ¦´ð
+uint8_t I2C_ReceiveAck(void)               //æŽ¥å—åº”ç­”
 {
 	uint8_t ack;
 	SCL_High();
 	SDA_high();
+	I2C_Delay();
 	ack = SDA_Read();
 	SCL_Low();
 	return ack;
 }
 
-void I2C_SendData(uint8_t data)            //ÍêÕû·¢ËÍÁ÷³Ì
+void I2C_SendData(uint8_t data)            //å®Œæ•´å‘é€æµç¨‹
 {
 	I2C_Start();
 	I2C_SendByte(data);
 	uint8_t I2C_ReceiveAck();
 	I2C_Stop();
+
 }
